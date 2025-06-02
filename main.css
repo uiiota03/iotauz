@@ -1,0 +1,79 @@
+.netral8 {
+    color: #2b2b2b;
+}
+
+.netral7 {
+    color: #424242;
+}
+
+.netral3 {
+    color: #8d8b8b;
+}
+
+.red5bg {
+    background-color: #F55757;
+}
+
+.red5c {
+    color: #F55757;
+}
+
+.red2bg {
+    background-color: #FEE7E7;
+}
+
+.absimg {
+    right: 85px;
+    bottom: 110px;
+}
+
+.pbutton:hover {
+    background-color: #F55757;
+    color: #FFFFFF;
+    border: none;
+}
+
+#adv-grid {
+    margin: 100px 0;
+}
+
+footer {
+    border-bottom: 20px solid #F55757;
+}
+
+#about {
+    background-image: url(./main\ img/image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 10;
+}
+
+.aboutoverflow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffd3;
+    top: 0;
+    left: 0;
+}
+
+/* Fade out animation */
+.modal-fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Visible state (default) */
+#partnerModal {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 767px) {
+  .car-image {
+    bottom: 0 !important;
+  }
+}
