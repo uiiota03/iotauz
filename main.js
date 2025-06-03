@@ -1,7 +1,29 @@
 // Mobile toggle
-document.getElementById('menu-toggle').addEventListener('click', () => {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
+// document.getElementById('menu-toggle').addEventListener('click', () => {
+//     const menu = document.getElementById('mobile-menu');
+//     menu.classList.toggle('hidden');
+// });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Menyu ochish/yopish
+    menuToggle.addEventListener('click', function () {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+        } else {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    // Havola bosilganda menyu yopish
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            mobileMenu.classList.add('hidden');
+        });
+    });
 });
 
 // Language sync (main + mobile)
@@ -167,6 +189,17 @@ document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
 });
 
+document.querySelectorAll('[id^="request-quote-"]').forEach(button => {
+    button.addEventListener('click', function () {
+        document.getElementById('inquiryModal1').classList.remove('hidden');
+        document.getElementById('product-name').value = this.getAttribute('data-product-name');
+        document.getElementById('part-no').value = this.getAttribute('data-part-no');
+        document.getElementById('quantity').value = this.getAttribute('data-quantity');
+        document.getElementById('delivery-date').value = this.getAttribute('data-delivery-date');
+        // Select optionlarni dinamik to'ldirish uchun qo'shimcha logika kerak bo'lishi mumkin
+    });
+});
+
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -314,7 +347,19 @@ const translations = {
         email_label: "Email",
         company_name_label: "Company Name",
         message_label: "Message",
-        submit_partner: "Submit"
+        submit_partner: "Submit",
+        submit_inquiry: "Submit Inquiry",
+        product_name: "Product Name",
+        part_no: "Part No",
+        quantity: "Quantity",
+        delivery_date: "Delivery Date",
+        your_contact_info: "Your Contact Information",
+        name: "Your Name",
+        phone: "Phone Number",
+        company: "Company Name",
+        email: "Email Address",
+        cancel: "Cancel",
+        confirm_send: "Confirm & Send"
     },
     uz: {
         about: "Haqida",
@@ -399,7 +444,19 @@ const translations = {
         email_label: "Elektron Pochta",
         company_name_label: "Kompaniya Nomi",
         message_label: "Xabar",
-        submit_partner: "Yuborish"
+        submit_partner: "Yuborish",
+        submit_inquiry: "So'rov Yuborish",
+        product_name: "Mahsulot Nomi",
+        part_no: "Qism Raqami",
+        quantity: "Miqdor",
+        delivery_date: "Yetkazib Berish Sanasi",
+        your_contact_info: "Sizning Aloqa Ma'lumotlaringiz",
+        name: "Ismingiz",
+        phone: "Telefon Raqam",
+        company: "Kompaniya Nomi",
+        email: "Elektron Pochta",
+        cancel: "Bekor Qilish",
+        confirm_send: "Tasdiqlash va Yuborish"
     },
     ru: {
         about: "О нас",
@@ -484,7 +541,19 @@ const translations = {
         email_label: "Электронная почта",
         company_name_label: "Название компании",
         message_label: "Сообщение",
-        submit_partner: "Отправить"
+        submit_partner: "Отправить",
+        submit_inquiry: "Отправить запрос",
+        product_name: "Название продукта",
+        part_no: "Номер части",
+        quantity: "Количество",
+        delivery_date: "Дата доставки",
+        your_contact_info: "Ваша контактная информация",
+        name: "Ваше имя",
+        phone: "Номер телефона",
+        company: "Название компании",
+        email: "Электронная почта",
+        cancel: "Отмена",
+        confirm_send: "Подтвердить и отправить"
     },
     ko: {
         about: "소개",
@@ -569,7 +638,19 @@ const translations = {
         email_label: "이메일",
         company_name_label: "회사 이름",
         message_label: "메시지",
-        submit_partner: "제출"
+        submit_partner: "제출",
+        submit_inquiry: "문의 제출",
+        product_name: "제품 이름",
+        part_no: "부품 번호",
+        quantity: "수량",
+        delivery_date: "배송 날짜",
+        your_contact_info: "귀하의 연락처 정보",
+        name: "당신의 이름",
+        phone: "전화 번호",
+        company: "회사 이름",
+        email: "이메일 주소",
+        cancel: "취소",
+        confirm_send: "확인 및 보내기"
     }
 };
 
@@ -578,6 +659,11 @@ let currentLanguage = 'en';
 
 // Update content based on language
 function updateLanguage(lang) {
+    console.log("Checking lang:", lang);
+    if (!document.getElementById('language-select')) console.log("language-select not found");
+    // 653-qator yaqinidagi elementni tekshiring, masalan:
+    console.log("Element at 653:", document.getElementById('partner-title')); // 'suspected-id'ni 653-qatordagi ID bilan almashtiring
+
     currentLanguage = lang;
     const t = translations[lang];
 
@@ -601,7 +687,7 @@ function updateLanguage(lang) {
     document.getElementById('delivery-date-value').textContent = t.delivery_date_value;
     document.getElementById('part-no-label').textContent = t.part_no_label;
     document.getElementById('part-no-value').textContent = t.part_no_value;
-    document.getElementById('submit-inquiry').textContent = t.submit_inquiry;
+    document.getElementById('openInquiryModal1').textContent = t.submit_inquiry;
     document.getElementById('status-text').textContent = t.status_text;
     document.getElementById('support-text').textContent = t.support_text;
     document.getElementById('products-title').textContent = t.products_title;
@@ -664,15 +750,27 @@ function updateLanguage(lang) {
     document.getElementById('company-name-label').textContent = t.company_name_label;
     document.getElementById('message-label').textContent = t.message_label;
     document.getElementById('submit-partner').textContent = t.submit_partner;
-}
-
-// Language selector event listener
-document.getElementById('language-select').addEventListener('change', function () {
-    updateLanguage(this.value);
-});
+    document.getElementById('inquiryModal1').querySelector('h2').textContent = t.submit_inquiry;
+    document.querySelector('label[for="product-name"]').textContent = t.product_name;
+    document.querySelector('label[for="part-no"]').textContent = t.part_no;
+    document.querySelector('label[for="quantity"]').textContent = t.quantity;
+    document.querySelector('label[for="delivery-date"]').textContent = t.delivery_date;
+    document.querySelector('#inquiryForm1 .bg-gray-100 h3').textContent = t.your_contact_info;
+    document.getElementById('cancelInquiryModal1').textContent = t.cancel;
+    document.querySelector('#inquiryForm1 button[type="submit"]').textContent = t.confirm_send;
+    document.querySelectorAll('#inquiryForm1 .bg-gray-100 input[type="text"]:not([name="company"]), #inquiryForm1 .bg-gray-100 input[type="tel"], #inquiryForm1 .bg-gray-100 input[type="email"]').forEach(input => {
+        if (input.placeholder === "Your Name") input.placeholder = t.name;
+        if (input.placeholder === "Phone Number") input.placeholder = t.phone;
+        if (input.placeholder === "Company Name") input.placeholder = t.company;
+        if (input.placeholder === "Email Address") input.placeholder = t.email;
+    });
+};
 
 // Initial update
-updateLanguage(currentLanguage);
+document.addEventListener('DOMContentLoaded', function () {
+    // updateLanguage chaqiruvi shu yerda
+    updateLanguage(currentLanguage);
+});
 
 // Existing scripts for other functionalities
 function openModal(imgSrc) {
@@ -711,4 +809,45 @@ buttons.forEach(button => {
         button.classList.remove('text-gray-400');
         document.getElementById(button.dataset.tab).classList.remove('hidden');
     });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('section'); // Barcha sectionlarni tanlash
+    const buttons = document.querySelectorAll('.hero-button');
+
+    // Sahifa yuklanganda dastlabki ko‘rinadigan knopkalarni tekshirish
+    buttons.forEach(button => {
+        const section = button.closest('section');
+        if (section && isInViewport(section)) {
+            button.classList.add('animate-up');
+        }
+    });
+
+    // Scroll qilinganda animatsiyani boshqarish
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const buttonsInSection = entry.target.querySelectorAll('.hero-button');
+                buttonsInSection.forEach(button => {
+                    if (!button.classList.contains('animate-up')) {
+                        button.classList.add('animate-up');
+                    }
+                });
+                observer.unobserve(entry.target); // Bir marta animatsiya qilingandan so‘ng to‘xtatish
+            }
+        });
+    }, { threshold: 0.3 }); // 30% ko‘ringanda animatsiya boshlanadi
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Element ko‘rinishini tekshirish funksiyasi
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    }
 });
