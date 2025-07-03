@@ -57,9 +57,14 @@ setInterval(() => {
 // Form submit
 document.addEventListener("DOMContentLoaded", () => {
     const products = [
-        { name: "AC Pipe Model A", partNo: "1155" },
-        { name: "AC Pipe Model B", partNo: "1156" },
-        { name: "AC Pipe Model C", partNo: "1157" },
+        { name: "Cobalt", partNo: "9477 4929" },
+        { name: "Cobalt", partNo: "5214 4957" },
+        { name: "Lacetti", partNo: "2632 1817" },
+        { name: "Lacetti", partNo: "2630 7044" },
+        { name: "Onix", partNo: "2629 7141" },
+        { name: "Onix", partNo: "2630 7046" },
+        { name: "Tracker", partNo: "2632 1339" },
+        { name: "Tracker", partNo: "2629 2544" },
     ];
 
     const productNameSelect = document.getElementById('product-name');
@@ -362,14 +367,14 @@ const translations = {
         confirm_send: "Confirm & Send"
     },
     uz: {
-        about: "Haqida",
+        about: "Biz haqimizda",
         products: "Mahsulotlar",
         advantages: "Afzalliklar",
-        partner: "Hamkorlikka Kirish",
-        contact: "Biz bilan Bog'lanish",
+        partner: "Hamkorlik",
+        contact: "Bog'lanish",
         hero_title: "Yuqori Sifatli Avtomobil AC Qismlari",
         hero_description: "Bizning dunyodagi eng yaxshi avtomobil AC komponentlari bilan yuqori samarali sovutishni his eting.",
-        hero_get_in_touch: "Biz bilan Bog'laning",
+        hero_get_in_touch: "Bog'laning",
         hero_products: "Mahsulotlar",
         inquiry_tab: "Mahsulot So'rovi",
         status_tab: "Buyurtma Holati",
@@ -382,7 +387,7 @@ const translations = {
         delivery_date_value: "01.08.2025",
         part_no_label: "Qism Raqami",
         part_no_value: "1155",
-        submit_inquiry: "So'rovni Yuborish!",
+        submit_inquiry: "So'rov Yuborish!",
         status_text: "Buyurtma holati bo'limi tez orada...",
         support_text: "Qo'llab-quvvatlash bo'limi tez orada...",
         products_title: "Mahsulotlar",
@@ -556,7 +561,7 @@ const translations = {
         confirm_send: "Подтвердить и отправить"
     },
     ko: {
-        about: "소개",
+        about: "소개회사 소개",
         products: "제품",
         advantages: "장점",
         partner: "파트너 되기",
@@ -659,10 +664,10 @@ let currentLanguage = 'en';
 
 // Update content based on language
 function updateLanguage(lang) {
-    console.log("Checking lang:", lang);
-    if (!document.getElementById('language-select')) console.log("language-select not found");
+    // console.log("Checking lang:", lang);
+    // if (!document.getElementById('language-select')) console.log("language-select not found");
     // 653-qator yaqinidagi elementni tekshiring, masalan:
-    console.log("Element at 653:", document.getElementById('partner-title')); // 'suspected-id'ni 653-qatordagi ID bilan almashtiring
+    // console.log("Element at 653:", document.getElementById('partner-title')); // 'suspected-id'ni 653-qatordagi ID bilan almashtiring
 
     currentLanguage = lang;
     const t = translations[lang];
@@ -696,10 +701,10 @@ function updateLanguage(lang) {
     document.getElementById('request-quote-1').textContent = t.request_quote_1;
     document.getElementById('request-quote-2').textContent = t.request_quote_2;
     document.getElementById('request-quote-3').textContent = t.request_quote_3;
-    document.getElementById('request-quote-4').textContent = t.request_quote_4;
-    document.getElementById('request-quote-5').textContent = t.request_quote_5;
-    document.getElementById('request-quote-6').textContent = t.request_quote_6;
-    document.getElementById('request-quote-7').textContent = t.request_quote_7;
+    // document.getElementById('request-quote-4').textContent = t.request_quote_4;
+    // document.getElementById('request-quote-5').textContent = t.request_quote_5;
+    // document.getElementById('request-quote-6').textContent = t.request_quote_6;
+    // document.getElementById('request-quote-7').textContent = t.request_quote_7;
     document.getElementById('see-all').textContent = t.see_all;
     document.getElementById('solutions-title').textContent = t.solutions_title;
     document.getElementById('iota-solutions').innerHTML = t.iota_solutions;
